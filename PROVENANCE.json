@@ -1,0 +1,26 @@
+[
+  {
+    "source_file": "density_mps.py",
+    "packaged_file": "simbench/density_mps.py",
+    "source_sha256": "dcf588ca69d1010d97417d114c8aadcdf16c7f1f565ae0f314a5dcf32b4c364a",
+    "packaged_sha256": "dcf588ca69d1010d97417d114c8aadcdf16c7f1f565ae0f314a5dcf32b4c364a"
+  },
+  {
+    "source_file": "dmrg_engine.py",
+    "packaged_file": "simbench/dmrg_engine.py",
+    "source_sha256": "2d4ec19360cd9f1788f11b4074d9161f3960a9312255c8f5d416e7f07e868d39",
+    "packaged_sha256": "2d4ec19360cd9f1788f11b4074d9161f3960a9312255c8f5d416e7f07e868d39"
+  },
+  {
+    "source_file": "simulators.py",
+    "packaged_file": "simbench/kernels.py",
+    "source_sha256": "d2f19e7ffbbed300b16fba47255bcb6afe7dec28be84e912d8020b4c781b78cd",
+    "packaged_sha256": "e852895ea3ad5d919af55da94fb586d4f349bca30ea2c9f72993401584d19de6"
+  },
+  {
+    "source_file": "engine.py",
+    "packaged_file": "simbench/engine.py",
+    "source_sha256": "c0a80b61a6d41888c5efc4886a02f14f9c978df0895fb0f9e3432caa326dc946",
+    "packaged_sha256": "7f37b0303b106f65f8e5b93a1c3a16894814593f20806a624c400bf34949000e"
+  }
+]

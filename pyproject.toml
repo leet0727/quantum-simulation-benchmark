@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantum-simulation-benchmark"
+version = "0.1.0"
+description = "Configurable whole-circuit noisy quantum simulation benchmark"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.2,<3", "scipy>=1.15,<2", "qiskit>=2.2,<3", "qiskit-ibm-runtime>=0.49,<0.50", "opt_einsum>=3.4,<4", "psutil>=6,<8", "rich>=13,<15"]
+
+[project.optional-dependencies]
+cpu = ["qiskit-aer==0.17.2"]
+gpu = ["cupy-cuda12x>=14.2,<15", "cuquantum-python-cu12>=26.6,<27", "nvidia-ml-py>=12"]
+plots = ["matplotlib>=3.9,<4"]
+
+[project.scripts]
+simbench = "simbench.runner:main"
+simbench-report = "simbench.report:main"
+
+[tool.setuptools.packages.find]
+include = ["simbench*"]
+
+[tool.setuptools.data-files]
+"share/quantum-simulation-benchmark" = ["NOTICE.md", "PROVENANCE.json"]
+"share/quantum-simulation-benchmark/licenses" = ["licenses/qtpu-APACHE-2.0.txt"]

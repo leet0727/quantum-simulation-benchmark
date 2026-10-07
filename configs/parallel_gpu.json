@@ -1,0 +1,159 @@
+{
+  "output_dir": "results/parallel_campaign",
+  "circuits": {
+    "families": [
+      "chain",
+      "brickwork",
+      "clifford",
+      "clusters",
+      "all_to_all",
+      "qaoa",
+      "grid2d",
+      "qft"
+    ],
+    "qubits": [
+      10,
+      12,
+      14
+    ],
+    "layers": [
+      16,
+      32,
+      64
+    ],
+    "seed_count": 5,
+    "seed_start": 22101
+  },
+  "methods": [
+    {
+      "name": "dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    {
+      "name": "density_mps",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "bond_dimensions": [
+        16,
+        64,
+        256,
+        512,
+        1024
+      ]
+    },
+    {
+      "name": "dmrg",
+      "devices": [
+        "gpu"
+      ],
+      "bond_dimensions": [
+        16,
+        64,
+        256,
+        512,
+        1024
+      ],
+      "sweeps": 4
+    },
+    {
+      "name": "low_rank",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "ranks": [
+        8,
+        32,
+        128,
+        256,
+        1024
+      ]
+    },
+    {
+      "name": "trajectory_dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "shots": [
+        256,
+        1024,
+        4096,
+        16384,
+        65536
+      ]
+    },
+    {
+      "name": "trajectory_mps",
+      "devices": [
+        "cpu"
+      ],
+      "bond_dimensions": [
+        16,
+        64,
+        256,
+        512,
+        1024
+      ],
+      "shots": [
+        256,
+        1024,
+        4096,
+        16384,
+        65536
+      ],
+      "sweep": "paired_with_fixed_shots",
+      "fixed_shots": 256
+    },
+    {
+      "name": "sparse_pauli",
+      "devices": [
+        "cpu"
+      ],
+      "terms": [
+        2048,
+        8192,
+        32768,
+        131072,
+        524288
+      ],
+      "cutoffs": [
+        1e-05,
+        1e-06,
+        1e-07,
+        1e-08,
+        1e-09
+      ]
+    },
+    {
+      "name": "tensor_network",
+      "devices": [
+        "gpu"
+      ]
+    }
+  ],
+  "timeout_s": 7200,
+  "execution": {
+    "mode": "parallel",
+    "gpu_ids": [
+      0,
+      1
+    ],
+    "cpu_workers": 2,
+    "threads_per_worker": 4
+  },
+  "scheduling": {
+    "mode": "qubits_first"
+  },
+  "pilot": {
+    "enabled": true,
+    "qubits": 4,
+    "layers": 2,
+    "seed": 22001
+  }
+}

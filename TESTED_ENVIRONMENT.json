@@ -1,0 +1,51 @@
+{
+  "python": "3.11",
+  "platform": "Linux x86_64",
+  "packages": [
+    {
+      "name": "cupy-cuda12x",
+      "version": "14.2.0"
+    },
+    {
+      "name": "cuquantum-python-cu12",
+      "version": "26.6.0"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.1"
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6"
+    },
+    {
+      "name": "opt_einsum",
+      "version": "3.4.0"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "name": "qiskit",
+      "version": "2.5.2"
+    },
+    {
+      "name": "qiskit-aer",
+      "version": "0.17.2"
+    },
+    {
+      "name": "qiskit-ibm-runtime",
+      "version": "0.49.0"
+    },
+    {
+      "name": "rich",
+      "version": "14.3.4"
+    },
+    {
+      "name": "scipy",
+      "version": "1.17.1"
+    }
+  ],
+  "note": "Versions observed in validation environment; GPU wheel supports CPU tests too. This is a record, not a lockfile."
+}

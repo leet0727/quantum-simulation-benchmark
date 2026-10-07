@@ -1,0 +1,83 @@
+{
+  "output_dir": "results/smoke_cpu",
+  "circuits": {
+    "families": [
+      "chain",
+      "grid2d"
+    ],
+    "qubits": [
+      3
+    ],
+    "layers": [
+      2
+    ],
+    "seeds": [
+      17
+    ]
+  },
+  "methods": [
+    {
+      "name": "dense",
+      "devices": [
+        "cpu"
+      ]
+    },
+    {
+      "name": "density_mps",
+      "bond_dimensions": [
+        4
+      ]
+    },
+    {
+      "name": "low_rank",
+      "ranks": [
+        4
+      ]
+    },
+    {
+      "name": "trajectory_dense",
+      "shots": [
+        32
+      ]
+    },
+    {
+      "name": "trajectory_mps",
+      "shots": [
+        32
+      ],
+      "bond_dimensions": [
+        4
+      ]
+    },
+    {
+      "name": "sparse_pauli",
+      "terms": [
+        64
+      ],
+      "cutoffs": [
+        1e-10
+      ]
+    },
+    {
+      "name": "tensor_network",
+      "devices": [
+        "cpu"
+      ]
+    }
+  ],
+  "execution": {
+    "mode": "parallel",
+    "gpu_ids": [],
+    "cpu_workers": 2,
+    "threads_per_worker": 1
+  },
+  "pilot": {
+    "enabled": true,
+    "qubits": 3,
+    "layers": 1
+  },
+  "resources": {
+    "min_free_disk_gib": 0.1
+  },
+  "timeout_s": 120
+}
