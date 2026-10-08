@@ -1,0 +1,117 @@
+{
+  "output_dir": "results/smoke_two_gpu",
+  "circuits": {
+    "families": [
+      "chain",
+      "grid2d"
+    ],
+    "qubits": [
+      3
+    ],
+    "layers": [
+      2
+    ],
+    "seeds": [
+      17
+    ]
+  },
+  "methods": [
+    {
+      "name": "dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    {
+      "name": "density_mps",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "bond_dimensions": [
+        4
+      ]
+    },
+    {
+      "name": "dmrg",
+      "devices": [
+        "gpu"
+      ],
+      "bond_dimensions": [
+        4
+      ],
+      "sweeps": 4
+    },
+    {
+      "name": "low_rank",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "ranks": [
+        4
+      ]
+    },
+    {
+      "name": "trajectory_dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "shots": [
+        32
+      ]
+    },
+    {
+      "name": "trajectory_mps",
+      "devices": [
+        "cpu"
+      ],
+      "bond_dimensions": [
+        4
+      ],
+      "shots": [
+        32
+      ],
+      "sweep": "paired_with_fixed_shots",
+      "fixed_shots": 32
+    },
+    {
+      "name": "sparse_pauli",
+      "devices": [
+        "cpu"
+      ],
+      "terms": [
+        64
+      ],
+      "cutoffs": [
+        1e-10
+      ]
+    },
+    {
+      "name": "tensor_network",
+      "devices": [
+        "gpu"
+      ]
+    }
+  ],
+  "execution": {
+    "mode": "parallel",
+    "gpu_ids": [
+      0,
+      1
+    ],
+    "cpu_workers": 2,
+    "threads_per_worker": 2
+  },
+  "pilot": {
+    "enabled": true,
+    "qubits": 3,
+    "layers": 1
+  },
+  "resources": {
+    "min_free_disk_gib": 0.1
+  },
+  "timeout_s": 120
+}

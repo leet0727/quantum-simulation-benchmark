@@ -1,0 +1,146 @@
+{
+  "output_dir": "/mnt/main/tklee/quantum-simulation-benchmark/results/balanced_simulation_study/main/n12",
+  "circuits": {
+    "families": [
+      "chain",
+      "brickwork",
+      "clifford",
+      "clusters",
+      "all_to_all",
+      "qaoa",
+      "grid2d",
+      "qft"
+    ],
+    "qubits": [
+      12
+    ],
+    "layers": [
+      16,
+      32,
+      64
+    ],
+    "seed_count": 5,
+    "seed_start": 22101
+  },
+  "methods": [
+    {
+      "name": "dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    {
+      "name": "density_mps",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "bond_dimensions": [
+        16,
+        64,
+        256
+      ]
+    },
+    {
+      "name": "dmrg",
+      "devices": [
+        "gpu"
+      ],
+      "bond_dimensions": [
+        16,
+        64,
+        256
+      ],
+      "sweeps": 4
+    },
+    {
+      "name": "low_rank",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "ranks": [
+        8,
+        32,
+        128
+      ]
+    },
+    {
+      "name": "trajectory_dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "shots": [
+        256,
+        1024
+      ]
+    },
+    {
+      "name": "trajectory_mps",
+      "devices": [
+        "cpu"
+      ],
+      "bond_dimensions": [
+        16,
+        64
+      ],
+      "shots": [
+        256,
+        1024
+      ],
+      "sweep": "cartesian"
+    },
+    {
+      "name": "sparse_pauli",
+      "devices": [
+        "cpu"
+      ],
+      "terms": [
+        2048,
+        8192,
+        32768
+      ],
+      "cutoffs": [
+        1e-05,
+        1e-06,
+        1e-07
+      ]
+    },
+    {
+      "name": "tensor_network",
+      "devices": [
+        "gpu"
+      ]
+    }
+  ],
+  "timeout_s": 300,
+  "execution": {
+    "mode": "parallel",
+    "gpu_ids": [
+      0,
+      1
+    ],
+    "cpu_workers": 4,
+    "threads_per_worker": 8
+  },
+  "scheduling": {
+    "mode": "qubits_first"
+  },
+  "pilot": {
+    "enabled": true,
+    "qubits": 4,
+    "layers": 2,
+    "seed": 22001
+  },
+  "resources": {
+    "host_rss_gib": 64,
+    "gpu_memory_gib": 72,
+    "workspace_gib": 40,
+    "tn_intermediate_gib": 16,
+    "max_output_gib": 8,
+    "reference_cache_gib": 48,
+    "min_free_disk_gib": 20
+  }
+}

@@ -31,6 +31,11 @@ The GPU dependencies target CUDA 12 on Linux. The build helper also needs the CU
 
 ## Configuration and scheduling
 
+The current two-GPU study uses a balanced main comparison and a separate high-budget subset:
+**12,600 evaluations across six stages**, with 300/900-second evaluation deadlines.
+See [BALANCED_STUDY.md](BALANCED_STUDY.md) for fixed budgets, provenance, launcher and monitor commands.
+The balanced and local GPU presets use machine-specific NAS output paths; edit them for another environment.
+
 Edit `input.json`; a complete option guide is in [CONFIGURATION.md](CONFIGURATION.md). The provided full configuration contains:
 
 - Eight families: chain, brickwork, Clifford, clusters, random long-range pairs, ring QAOA, grid, and QFT-style blocks with random rotations.

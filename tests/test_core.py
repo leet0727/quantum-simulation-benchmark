@@ -54,6 +54,18 @@ class NumericalTests(unittest.TestCase):
         for cfg in configs:
             with self.subTest(method=cfg):
                 rho,_,_=evaluate(v,cfg,lambda *a:None);self.assertLess(np.linalg.norm(rho-reference),1e-10)
+        # An SVD convergence failure must recover without changing the noisy output.
+        from unittest.mock import patch
+        svd=np.linalg.svd
+        calls=[0]
+        def fail_once(*args,**kwargs):
+            calls[0]+=1
+            if calls[0]==1:raise np.linalg.LinAlgError('SVD did not converge')
+            return svd(*args,**kwargs)
+        with patch('numpy.linalg.svd',side_effect=fail_once):
+            rho,meta,_=evaluate(v,dict(family='density_mps',chi=16),lambda *a:None)
+        self.assertLess(np.linalg.norm(rho-reference),1e-10)
+        self.assertEqual(meta['svd_fallback_count'],1)
         # Projected-fidelity result agrees with an explicit Euclidean PSD/trace-one projection.
         rng=np.random.default_rng(13);a=rng.normal(size=(8,8))+1j*rng.normal(size=(8,8));rho=a+a.conj().T
         psi=Statevector.from_instruction(qc).data;vals,vec=np.linalg.eigh(rho);u=vals[::-1];offset=(np.cumsum(u)-1)/np.arange(1,9)

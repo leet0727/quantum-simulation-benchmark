@@ -1,0 +1,127 @@
+{
+  "output_dir": "/mnt/main/tklee/quantum-simulation-benchmark/results/balanced_simulation_study/scaling/n12",
+  "circuits": {
+    "families": [
+      "chain",
+      "brickwork",
+      "clifford",
+      "clusters",
+      "all_to_all",
+      "qaoa",
+      "grid2d",
+      "qft"
+    ],
+    "qubits": [
+      12
+    ],
+    "layers": [
+      16,
+      64
+    ],
+    "seed_count": 2,
+    "seed_start": 22101
+  },
+  "methods": [
+    {
+      "name": "density_mps",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "bond_dimensions": [
+        512,
+        1024
+      ]
+    },
+    {
+      "name": "dmrg",
+      "devices": [
+        "gpu"
+      ],
+      "bond_dimensions": [
+        512,
+        1024
+      ],
+      "sweeps": 4
+    },
+    {
+      "name": "low_rank",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "ranks": [
+        256,
+        1024
+      ]
+    },
+    {
+      "name": "trajectory_dense",
+      "devices": [
+        "cpu",
+        "gpu"
+      ],
+      "shots": [
+        4096,
+        16384
+      ]
+    },
+    {
+      "name": "trajectory_mps",
+      "devices": [
+        "cpu"
+      ],
+      "bond_dimensions": [
+        64
+      ],
+      "shots": [
+        256,
+        4096,
+        16384
+      ],
+      "sweep": "cartesian"
+    },
+    {
+      "name": "sparse_pauli",
+      "devices": [
+        "cpu"
+      ],
+      "terms": [
+        131072,
+        524288
+      ],
+      "cutoffs": [
+        1e-08,
+        1e-09
+      ]
+    }
+  ],
+  "timeout_s": 900,
+  "execution": {
+    "mode": "parallel",
+    "gpu_ids": [
+      0,
+      1
+    ],
+    "cpu_workers": 4,
+    "threads_per_worker": 8
+  },
+  "scheduling": {
+    "mode": "qubits_first"
+  },
+  "pilot": {
+    "enabled": true,
+    "qubits": 4,
+    "layers": 2,
+    "seed": 22001
+  },
+  "resources": {
+    "host_rss_gib": 64,
+    "gpu_memory_gib": 72,
+    "workspace_gib": 40,
+    "tn_intermediate_gib": 16,
+    "max_output_gib": 8,
+    "reference_cache_gib": 48,
+    "min_free_disk_gib": 20
+  }
+}

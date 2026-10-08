@@ -31,6 +31,7 @@ class DensityMPS:
             t[0, 0, 0] = 1
         self.discarded = 0.0
         self.svd_count = 0
+        self.svd_fallback_count = 0
         self.swap_count = 0
 
     def center_pair(self, site):
@@ -52,7 +53,17 @@ class DensityMPS:
         left, right = ts[site], ts[site+1]
         merged = xp.einsum('asi,itb->astb', left, right)
         merged = xp.einsum('uvst,astb->auvb', xp.asarray(channel).reshape(4,4,4,4), merged)
-        u, s, vh = xp.linalg.svd(merged.reshape(left.shape[0]*4, 4*right.shape[2]), full_matrices=False)
+        matrix = merged.reshape(left.shape[0]*4, 4*right.shape[2])
+        try:
+            u, s, vh = xp.linalg.svd(matrix, full_matrices=False)
+        except np.linalg.LinAlgError:
+            # LAPACK's divide-and-conquer solver can fail on finite inputs.
+            # Retry CPU matrices with the classical solver; preserve GPU errors.
+            if xp is not np or not np.all(np.isfinite(matrix)):
+                raise
+            from scipy.linalg import svd
+            u, s, vh = svd(matrix, full_matrices=False, lapack_driver='gesvd')
+            self.svd_fallback_count += 1
         keep = min(self.chi, len(s))
         self.discarded += float(xp.sum(s[keep:]**2).real.item())
         ts[site] = u[:, :keep].reshape(left.shape[0], 4, keep)
@@ -105,4 +116,5 @@ class DensityMPS:
         return {"bond_cap": self.chi, "actual_max_bond": max(t.shape[2] for t in self.tensors),
                 "discarded_hilbert_schmidt_weight_sum": self.discarded,
                 "svd_count": self.svd_count, "internal_swap_count": self.swap_count,
+                "svd_fallback_count": self.svd_fallback_count,
                 "device": "GPU" if self.xp.__name__ == "cupy" else "CPU"}
